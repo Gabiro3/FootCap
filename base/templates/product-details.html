@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="small-container single-product">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{products.avatar.url}}" width="100%" id="ProductImg">
+
+            <div class="small-img-row">
+                <div class="small-img-col">
+                    <img src="{{products.avatar.url}}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{products.avatar.url}}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{products.avatar.url}}" width="100%" class="small-img">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{products.avatar.url}}" width="100%" class="small-img">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2">
+            <p>{{products.category}}</p>
+            <h1>{{products.name}}</h1>
+            <h4>${{products.price}}</h4>
+            <select>
+                <option>Select Size</option>
+                <option>XXL</option>
+                <option>XL</option>
+                <option>L</option>
+                <option>M</option>
+                <option>S</option>
+            </select>
+            {% if user.is_authenticated %}
+            <a href="{% url 'viewcart' products.id %}" class="btn">Add To Cart</a>
+            {% endif %}
+            <h3>Product Details <i class="fa fa-indent"></i></h3>
+            <br>
+            <p>Explore the world of fashion with the {{products.name}}. Proudly Made by <strong>{{products.brand}}</strong></p>
+        </div>
+    </div>
+</div>
+<!-- title -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Related Products</h2>
+        <a href="{% url 'products' %}">View More</a>
+    </div>
+</div>
+<!-- Products -->
+<div class="small-container">
+    <div class="row">
+        {% for product in related %}
+        {% if products.brand == product.brand and product.name != products.name %}
+        <div class="col-4">
+            <img src="{{product.avatar.url}}">
+            <h4>{{product.name}}</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{product.price}}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

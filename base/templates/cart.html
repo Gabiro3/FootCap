@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block content %}
+    <!-- Cart items details -->
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="{{product.avatar.url}}">
+                        <div>
+                            <p>{{product.name}}</p>
+                            <small>Price: ${{product.price}}</small>
+                            <br>
+                            <a href="{% url 'remove-cart' product.id %}">Remove</a>
+                        </div>
+                    </div>
+                </td>
+                <td><input type="number" value="1"></td>
+                <td>${{product.price}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>${{sub_total}}.0</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>${{tax}}.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>${{ net }}.00</strong></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}

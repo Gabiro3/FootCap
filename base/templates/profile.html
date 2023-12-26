@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="small-container single-product">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{request.user.avatar.url}}" width="100%" id="ProductImg">
+
+        </div>
+        <div class="col-2">
+            <h1>{{request.user.username}}</h1>
+            <h4>@{{request.user.name}}</h4>
+            <select>
+                <option>Select Size</option>
+                <option>XXL</option>
+                <option>XL</option>
+                <option>L</option>
+                <option>M</option>
+                <option>S</option>
+            </select>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn">Log Out</a>
+            <a href="{% url 'update-profile' %}" class="btn">Update Profile</a>
+            {% endif %}
+            <h3>Product Details <i class="fa fa-indent"></i></h3>
+            <br>
+            <p>Explore the world of fashion at RedStore. Proudly Made by <strong>Gabiro.</strong></p>
+        </div>
+    </div>
+</div>
+<!-- title -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Purchased Products</h2>
+        <a href="{% url 'products' %}">View More</a>
+        {{list}}
+    </div>
+</div>
+<!-- Products -->
+<div class="small-container">
+    <div class="row">
+        {% if products %}
+        <div class="col-4">
+            <img src="{{products.avatar.url}}">
+            <h4>{{products.name}}</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <p>${{products.price}}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
